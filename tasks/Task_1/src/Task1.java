@@ -1,4 +1,4 @@
-public class Task1Convert {
+public class Task1 {
     public static void main(String[] args) {
         int gallons = 8;
         double liters = gallonsToLiters(gallons);
