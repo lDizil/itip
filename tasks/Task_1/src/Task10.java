@@ -1,8 +1,9 @@
 public class Task10 {
     public static void main(String[] args) {
-        int students = 5;
-        int tables = 2;
-        int result = ((tables * 2 - students) < 1) ? (students - tables * 2) : 0;
+        int students = 53;
+        int tables = 58;
+        int requiredTables = (int) Math.ceil(students / 2.0);
+        int result = (requiredTables > tables) ? (requiredTables - tables) : 0;
         System.out.println(result);
     }
 }

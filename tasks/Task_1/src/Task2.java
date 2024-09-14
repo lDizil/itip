@@ -1,6 +1,6 @@
 public class Task2 {
     public static void main(String[] args) {
-        int time = 15;
+        int time = 41;
         int intensive = 3;
         int cal = fitCalc(time, intensive);
         System.out.println(cal);

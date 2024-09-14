@@ -1,6 +1,6 @@
 public class Task1 {
     public static void main(String[] args) {
-        int gallons = 8;
+        int gallons = 3;
         double liters = gallonsToLiters(gallons);
         System.out.println(gallons + " галлонов = " + liters + " литров");
     }

@@ -6,7 +6,7 @@ public class Task6 {
     }
 
     public static int amount(int n, double w, double h) {
-        double Fabric = n * 2;
+        double Fabric = n;
         double Detail = w * h * 2;
 
         int number = (int) (Fabric / Detail);

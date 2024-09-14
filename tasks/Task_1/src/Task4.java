@@ -1,8 +1,8 @@
 public class Task4 {
     public static void main(String[] args) {
-        int X = 3;
-        int Y = 4;
-        int Z = 5;
+        int X = 5;
+        int Y = 1;
+        int Z = 1;
         System.out.println(getTriangleType(X, Y, Z));
     }
 
