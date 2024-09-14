@@ -1,2 +1,2 @@
-# itip
-information technology and programming
+# information technology and programming
+
