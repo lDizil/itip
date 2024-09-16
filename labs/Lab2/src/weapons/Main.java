@@ -7,6 +7,7 @@ public class Main {
         Bow bow1 = new Bow("Auriel's Bow", 60, 20, "100 meters");
         MagicWand wand1 = new MagicWand("Elder Wand", 70, 90, "Elder");
 
+        // Демонстрация работы конструктора по умолчанию
         Sword sword2 = new Sword();
         sword2.setLength(100);
         sword2.setMaterial("Iron");

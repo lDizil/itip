@@ -28,7 +28,8 @@ public class MagicWand extends Weapons {
 
     @Override
     public void attack() {
-        System.out.println("The magic wand casts a spell with " + getDamage() + " damage. It has a spell power of "
-                + spellPower + " and is made of " + wandMaterial + ".");
+        System.out
+                .println("The " + getName() + " casts a spell with " + getDamage() + " damage. It has a spell power of "
+                        + spellPower + " and is made of " + wandMaterial + ".");
     }
 }

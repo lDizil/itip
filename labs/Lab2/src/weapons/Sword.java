@@ -5,7 +5,7 @@ public class Sword extends Weapons {
     private String material;
 
     public Sword() {
-        super("Unknow Sword", 0);
+        super();
         this.length = 0;
         this.material = "Unknown";
     }
@@ -35,10 +35,10 @@ public class Sword extends Weapons {
     @Override
     public void attack() {
         if (getDamage() == 0) {
-            System.out.println("The sword attacks with unknown damage. It is " + length +
+            System.out.println("The" + getName() + "attacks with unknown damage. It is " + length +
                     " cm long and made of " + material + ".");
         } else {
-            System.out.println("The sword slashes with " + getDamage() + " damage. It is " + length +
+            System.out.println("The " + getName() + " slashes with " + getDamage() + " damage. It is " + length +
                     " cm long and made of " + material + ".");
         }
     }
@@ -46,11 +46,13 @@ public class Sword extends Weapons {
     // Перегруженный метод attack
     public void attack(String attackType) {
         if (getDamage() == 0) {
-            System.out.println("The sword performs a " + attackType + " attack with unknown damage. It is " + length +
-                    " cm long and made of " + material + ".");
+            System.out.println(
+                    "The " + getName() + " performs a " + attackType + " attack with unknown damage. It is " + length +
+                            " cm long and made of " + material + ".");
         } else {
             System.out.println(
-                    "The sword performs a " + attackType + " attack with " + getDamage() + " damage. It is " + length +
+                    "The " + getName() + " performs a " + attackType + " attack with " + getDamage() + " damage. It is "
+                            + length +
                             " cm long and made of " + material + ".");
         }
     }

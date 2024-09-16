@@ -29,7 +29,8 @@ public class Bow extends Weapons {
 
     @Override
     public void attack() {
-        System.out.println("The bow shoots an arrow with " + getDamage() + " damage. It has low strength: "
-                + strength + ", and arrow max range distance " + range + ".");
+        System.out
+                .println("The " + getName() + " shoots an arrow with " + getDamage() + " damage. It has low strength: "
+                        + strength + ", and arrow max range distance " + range + ".");
     }
 }
