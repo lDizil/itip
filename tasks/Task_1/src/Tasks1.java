@@ -1,111 +1,86 @@
 public class Tasks1 {
     public static void main(String[] args) {
-        // task1: Перевод галлонов в литры
-        int gallons = 8;
-        double liters = gallonsToLiters(gallons);
-        System.out.println(gallons + " галлонов = " + liters + " литров");
+        System.out.println(Task1(5));
 
-        // task2: Расчет калорий по интенсивности
-        int time = 15;
-        int intensive = 3;
-        int cal = fitCalc(time, intensive);
-        System.out.println("Сожженные калории: " + cal);
+        System.out.println(Task2(24, 2));
 
-        // task3: Подсчет стоимости товаров
-        int boxes = 20;
-        int bags = 50;
-        int barrels = 100;
-        int value_boxes = 3;
-        int value_bags = 4;
-        int value_barrels = 2;
-        System.out.println("Стоимость товаров: " + (boxes * value_boxes + bags * value_bags + barrels * value_barrels));
+        System.out.println(Task3(3, 4, 2));
 
-        // task4: Определение типа треугольника
-        int X = 3;
-        int Y = 4;
-        int Z = 5;
-        System.out.println("Тип треугольника: " + getTriangleType(X, Y, Z));
+        System.out.println(Task4(5, 5, 4));
 
-        // task5: Максимум из двух чисел
-        int a = 8;
-        int b = 4;
+        System.out.println(Task5(10, 49));
+
+        System.out.println(Task6(22, 1.4, 2));
+
+        System.out.println(Task7(3));
+
+        System.out.println(Task8(48, 18));
+
+        System.out.println(Task9(53, 1250));
+
+        System.out.println(Task10(123, 58));
+    }
+
+    public static double Task1(int gallons) {
+        return gallons * 3.78;
+    }
+
+    public static int Task2(int time, int intens) {
+        return time * intens;
+    }
+
+    public static int Task3(int a, int b, int c) {
+        return a * 20 + b * 50 + c * 100;
+    }
+
+    // && - И, ||- ИЛИ
+    public static String Task4(int X, int Y, int Z) {
+        if (X + Y <= Z || X + Z <= Y || Y + Z <= X) {
+            return "не треугольник";
+        }
+
+        if (X == Y && Y == Z) {
+            return "равносторонний";
+        }
+
+        if (X == Y || Y == Z || X == Z) {
+            return "равнобедренный";
+        }
+        return "разносторонний";
+    }
+
+    public static int Task5(int a, int b) {
         int max = (a > b) ? a : b;
-        System.out.println("Максимум из двух чисел: " + max);
+        return max;
+    }
 
-        // task6: Количество деталей на ткани
-        System.out.println("Количество деталей на ткани: " + amount(22, 1.4, 2));
-        System.out.println(amount(45, 1.8, 1.9));
-        System.out.println(amount(100, 2, 2));
+    public static int Task6(int n, double w, double h) {
+        return (int) (n / (w * h * 2));
+    }
 
-        // task7: Факториал числа
-        a = 3;
+    public static int Task7(int a) {
         int result = 1;
         for (int i = 1; i <= a; i++) {
             result *= i;
         }
-        System.out.println("Факториал числа: " + result);
-
-        // task8: НОД двух чисел
-        int num1 = 48;
-        int num2 = 18;
-        int gcd = findGCD(num1, num2);
-        System.out.println("НОД: " + gcd);
-
-        // task9: Расчет дохода от продажи билетов
-        int ticket = 53;
-        int cost = 1250;
-        float ticketSaler = (ticket * cost) * 0.72f;
-        System.out.println("Доход от продажи билетов: " + ticketSaler);
-
-        // task10: Столы для студентов
-        int students = 5;
-        int tables = 2;
-        int requiredTables = (int) Math.ceil(students / 2.0);
-        int res = (requiredTables > tables) ? (requiredTables - tables) : 0;
-        System.out.println(res);
+        return result;
     }
 
-    // task1: Перевод галлонов в литры
-    public static double gallonsToLiters(int gallons) {
-        double liters = 3.78541 * gallons;
-        return liters;
-    }
-
-    // task2: Расчет калорий
-    public static int fitCalc(int intensive, int time) {
-        int cal = intensive * time;
-        return cal;
-    }
-
-    // task4: Определение типа треугольника
-    public static String getTriangleType(int X, int Y, int Z) {
-        if (X + Y <= Z || X + Z <= Y || Y + Z <= X) {
-            return "not a triangle";
-        }
-
-        if (X == Y && Y == Z) {
-            return "isosceles";
-        }
-        if (X == Y || Y == Z || X == Z) {
-            return "equilateral";
-        }
-        return "different-sided";
-    }
-
-    // task6: Количество деталей на ткани
-    public static int amount(int n, double w, double h) {
-        double Fabric = n;
-        double Detail = w * h * 2;
-
-        int number = (int) (Fabric / Detail);
-        return number;
-    }
-
-    // task8: НОД двух чисел
-    public static int findGCD(int a, int b) {
+    public static int Task8(int a, int b) {
         if (b == 0) {
             return a;
         }
-        return findGCD(b, a % b);
+        return Task8(b, a % b);
+    }
+
+    public static float Task9(int a, int b) {
+        return (a * b) * 0.72f;
+    }
+
+    public static int Task10(double a, double b) {
+        if (a - b * 2 <= 0) {
+            return 0;
+        }
+        return (int) Math.ceil((a - b * 2) / 2);
     }
 }
