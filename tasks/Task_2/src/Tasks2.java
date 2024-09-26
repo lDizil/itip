@@ -94,6 +94,8 @@ public class Tasks2 {
         return camel.replaceAll("([A-Z])", "_$1").toLowerCase();
     }
 
+    /// import java.util.Arrays;
+
     public static int task7(int... numbers) {
         return Arrays.stream(numbers).distinct().sorted().limit(numbers.length - 1).max().getAsInt();
     }
