@@ -10,9 +10,9 @@ public class Main {
         restaurantOrders.addOrder(3, new Order("Burger, Fries", 18.5, "14:00"));
 
         // Поиск заказа по номеру столика
-        int tableNumber = 2;
-        Order order = restaurantOrders.getOrder(tableNumber);
-        System.out.println("Order for table " + tableNumber + ": " + order);
+
+        Order order = restaurantOrders.getOrder(2);
+        System.out.println("Order for table " + 2 + ": " + order);
 
         // Удаление заказа
         restaurantOrders.removeOrder(1);

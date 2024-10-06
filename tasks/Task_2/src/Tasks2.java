@@ -29,7 +29,7 @@ public class Tasks2 {
         System.out.println(task9(5, 5, 5));
         System.out.println(task9(4, 9, 6));
 
-        System.out.println(task10("LISTEN", "silent")); // true
+        System.out.println(task10("LISTEN", "silent"));
 
     }
 
@@ -79,15 +79,15 @@ public class Tasks2 {
     /// import java.util.TreeSet;
 
     public static Integer[] task5(double... numbers) {
-        Set<Integer> compressedSet = new TreeSet<>();
+        Set<Integer> result = new TreeSet<>();
 
         for (double num : numbers) {
             if (num != 0) {
-                compressedSet.add((int) num);
+                result.add((int) num);
             }
         }
 
-        return compressedSet.toArray(new Integer[0]);
+        return result.toArray(new Integer[0]);
     }
 
     public static String task6(String camel) {

@@ -22,5 +22,13 @@ public class Main {
         System.out.println("Is empty: " + hashTable.isEmpty());
 
         hashTable.printAll();
+
+        for (int i = 1; i <= 30; i++) {
+            hashTable.put("key" + i, i);
+            System.out.println("Added key" + i + ": " + i);
+            System.out.println("Current table size: " + hashTable.getTableLength());
+            hashTable.printAll();
+        }
+
     }
 }

@@ -6,6 +6,7 @@ public class HashTable<K, V> {
     private LinkedList<Entry<K, V>>[] table;
     private int size;
     private static final int DEFAULT_CAPACITY = 16;
+    private static final double LOAD_FACTOR = 0.75;
 
     private static class Entry<K, V> {
         private K key;
@@ -40,7 +41,27 @@ public class HashTable<K, V> {
         return Math.abs(key.hashCode()) % table.length;
     }
 
+    // Метод для расширения массива и перераспределения элементов
+    @SuppressWarnings("unchecked")
+    private void resize() {
+        LinkedList<Entry<K, V>>[] oldTable = table;
+        table = new LinkedList[oldTable.length * 2];
+        size = 0;
+
+        for (LinkedList<Entry<K, V>> bucket : oldTable) {
+            if (bucket != null) {
+                for (Entry<K, V> entry : bucket) {
+                    put(entry.getKey(), entry.getValue());
+                }
+            }
+        }
+    }
+
     public void put(K key, V value) {
+        if ((double) size / table.length >= LOAD_FACTOR) {
+            resize();
+        }
+
         int index = hash(key);
         if (table[index] == null) {
             table[index] = new LinkedList<>();
@@ -88,6 +109,10 @@ public class HashTable<K, V> {
 
     public boolean isEmpty() {
         return size == 0;
+    }
+
+    public int getTableLength() {
+        return table.length;
     }
 
     public void printAll() {
