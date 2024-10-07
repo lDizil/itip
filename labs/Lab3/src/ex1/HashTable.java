@@ -36,12 +36,10 @@ public class HashTable<K, V> {
         size = 0;
     }
 
-    // Хэш-функция
     private int hash(K key) {
         return Math.abs(key.hashCode()) % table.length;
     }
 
-    // Метод для расширения массива и перераспределения элементов
     @SuppressWarnings("unchecked")
     private void resize() {
         LinkedList<Entry<K, V>>[] oldTable = table;
