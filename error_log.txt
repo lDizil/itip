@@ -1,0 +1,32 @@
+Исключение: java.lang.ArithmeticException: Ошибка: деление на ноль.
+Сообщение: Ошибка: деление на ноль.
+Стек вызовов:
+java.lang.ArithmeticException: Ошибка: деление на ноль.
+	at ex3.MathOperations.performOperation(MathOperations.java:42)
+	at ex3.MathOperations.main(MathOperations.java:18)
+--------------------------------
+Исключение: ex3.CustomUnsupportedOperationException: Операция modulus не поддерживается.
+Сообщение: Операция modulus не поддерживается.
+Стек вызовов:
+ex3.CustomUnsupportedOperationException: Операция modulus не поддерживается.
+	at ex3.MathOperations.performOperation(MathOperations.java:42)
+	at ex3.MathOperations.main(MathOperations.java:17)
+--------------------------------
+Исключение: ex3.CustomUnsupportedOperationException: Операция modulus не поддерживается.
+Сообщение: Операция modulus не поддерживается.
+Стек вызовов:
+ex3.MathOperations.performOperation(MathOperations.java:43)
+ex3.MathOperations.main(MathOperations.java:18)
+--------------------------------
+Исключение: ex3.CustomUnsupportedOperationException: Операция modulus не поддерживается.
+Сообщение: Операция modulus не поддерживается.
+Стек вызовов:
+ex3.MathOperations.performOperation(MathOperations.java:50)
+ex3.MathOperations.main(MathOperations.java:18)
+--------------------------------
+Исключение: ex3.CustomUnsupportedOperationException: Операция / не поддерживается.
+Сообщение: Операция / не поддерживается.
+Стек вызовов:
+ex3.MathOperations.performOperation(MathOperations.java:50)
+ex3.MathOperations.main(MathOperations.java:27)
+--------------------------------

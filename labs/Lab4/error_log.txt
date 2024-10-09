@@ -1,0 +1,12 @@
+Исключение: ex3.CustomUnsupportedOperationException: Операция modulus не поддерживается.
+Сообщение: Операция modulus не поддерживается.
+Стек вызовов:
+ex3.MathOperations.performOperation(MathOperations.java:43)
+ex3.MathOperations.main(MathOperations.java:18)
+--------------------------------
+Исключение: ex3.CustomUnsupportedOperationException: Операция modulus не поддерживается.
+Сообщение: Операция modulus не поддерживается.
+Стек вызовов:
+ex3.MathOperations.performOperation(MathOperations.java:43)
+ex3.MathOperations.main(MathOperations.java:18)
+--------------------------------

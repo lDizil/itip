@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class App {
+public class Tasks3 {
     public static void main(String[] args) {
         System.out.println(task1("sparkling", "groups"));
         System.out.println(task1("bush", "hubris"));
