@@ -3,24 +3,19 @@ package ex3;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 public class MathOperations {
     public static void main(String[] args) {
         try {
-            // Пример: корректные операции
             System.out.println("Сложение: " + performOperation(10, 5, "add"));
             System.out.println("Вычитание: " + performOperation(10, 5, "subtract"));
             System.out.println("Умножение: " + performOperation(10, 5, "multiply"));
             System.out.println("Деление: " + performOperation(10, 5, "divide"));
 
-            // Пример: некорректная операция (вызовет исключение)
             System.out.println("Неподдерживаемая операция: " + performOperation(10, 5, "modulus"));
 
         } catch (CustomUnsupportedOperationException | ArithmeticException e) {
-            // Логируем исключение в файл
             MathOperations.logException(e);
-            // Выводим сообщение об ошибке в консоль
             System.out.println("Произошла ошибка: " + e.getMessage());
         }
     }
