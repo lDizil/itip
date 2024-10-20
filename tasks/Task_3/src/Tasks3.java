@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 public class Tasks3 {
     public static void main(String[] args) {
@@ -8,12 +7,12 @@ public class Tasks3 {
         System.out.println(task1("", ""));
         System.out.println("---------");
 
-        List<List<Object>> items = new ArrayList<>(List.of(
-                new ArrayList<>(List.of("Laptop", 124200)),
-                new ArrayList<>(List.of("Phone", 51450)),
-                new ArrayList<>(List.of("Headphones", 13800)),
-                new ArrayList<>(List.of(25))));
-        System.out.println(task2(items));
+        String[][] items = {
+                { "Laptop", "124200" },
+                { "Phone", "51450" },
+                { "Headphones", "13800" }
+        };
+        System.out.println(Arrays.deepToString(task2(items, 25)));
         System.out.println("---------");
 
         System.out.println(task3(0, 0, 5, 2, 2));
@@ -35,10 +34,11 @@ public class Tasks3 {
         System.out.println(task6(4));
         System.out.println("---------");
 
-        List<List<Object>> inventory = List.of(
-                List.of("Скакалка", 550, 8),
-                List.of("Шлем", 3750, 4),
-                List.of("Мяч", 2900, 10));
+        String[][] inventory = {
+                { "Скакалка", "550", "8" },
+                { "Шлем", "3750", "4" },
+                { "Мяч", "2900", "10" }
+        };
         System.out.println(task7(inventory));
         System.out.println("---------");
 
@@ -56,6 +56,7 @@ public class Tasks3 {
         System.out.println(task10(1, 2, 1, 1, 1));
         System.out.println(task10(1, 2, 2, 1, 1));
         System.out.println("---------");
+
     }
 
     public static boolean task1(String a, String b) {
@@ -63,10 +64,12 @@ public class Tasks3 {
                 (a.charAt(0) == b.charAt(b.length() - 1) && a.charAt(a.length() - 1) == b.charAt(0));
     }
 
-    // import java.util.List;
-    public static List<List<Object>> task2(List<List<Object>> a) {
-        int discount = (int) a.remove(a.size() - 1).get(0);
-        a.forEach(b -> b.set(1, Math.max(1, (int) Math.round((int) b.get(1) * (1 - discount / 100.0)))));
+    public static String[][] task2(String[][] a, int discount) {
+        for (int i = 0; i < a.length; i++) {
+            int price = Integer.parseInt(a[i][1]);
+            int newPrice = Math.max(1, (int) Math.round(price * (1 - discount / 100.0)));
+            a[i][1] = String.valueOf(newPrice);
+        }
         return a;
     }
 
@@ -107,16 +110,18 @@ public class Tasks3 {
         return count;
     }
 
-    // import java.util.List;
-    public static String task7(List<List<Object>> items) {
+    public static String task7(String[][] items) {
         String mostExpensiveItem = "";
         int maxCost = 0;
 
-        for (List<Object> item : items) {
-            int cost = (int) item.get(1) * (int) item.get(2);
+        for (String[] item : items) {
+            int price = Integer.parseInt(item[1]);
+            int quantity = Integer.parseInt(item[2]);
+            int cost = price * quantity;
+
             if (cost > maxCost) {
                 maxCost = cost;
-                mostExpensiveItem = (String) item.get(0);
+                mostExpensiveItem = item[0];
             }
         }
 

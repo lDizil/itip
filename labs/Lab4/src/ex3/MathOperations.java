@@ -12,7 +12,8 @@ public class MathOperations {
             System.out.println("Умножение: " + performOperation(10, 5, "multiply"));
             System.out.println("Деление: " + performOperation(10, 5, "divide"));
 
-            System.out.println("Неподдерживаемая операция: " + performOperation(10, 5, "modulus"));
+            System.out.println(performOperation(10, 5, "sqrt"));
+            System.out.println(performOperation(10, 5, "modulus"));
 
         } catch (CustomUnsupportedOperationException | ArithmeticException e) {
             MathOperations.logException(e);
@@ -41,7 +42,8 @@ public class MathOperations {
 
     public static void logException(Exception e) {
         try (BufferedWriter writer = new BufferedWriter(
-                new FileWriter("D:/Zone 51/учеба вуз/итип/labs/Lab4/error_log.txt", true))) {
+                new FileWriter("D:/Zone 51/учеба вуз/итип/labs/Lab4/src/ex3/error_log.txt", true))) {
+            writer.write("Время: " + java.time.LocalDateTime.now() + "\n");
             writer.write("Исключение: " + e.toString() + "\n");
             writer.write("Сообщение: " + e.getMessage() + "\n");
             writer.write("Стек вызовов:\n");

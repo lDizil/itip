@@ -123,12 +123,12 @@ public class Tasks2 {
 
     /// import java.util.Arrays;
 
-    public static boolean task10(String str1, String str2) {
-        char[] arr1 = str1.toLowerCase().toCharArray();
-        char[] arr2 = str2.toLowerCase().toCharArray();
-        Arrays.sort(arr1);
-        Arrays.sort(arr2);
-        return Arrays.equals(arr1, arr2);
+    public static boolean task10(String a, String b) {
+        char[] a2 = a.toLowerCase().toCharArray();
+        char[] b2 = b.toLowerCase().toCharArray();
+        Arrays.sort(a2);
+        Arrays.sort(b2);
+        return Arrays.equals(a2, b2);
     }
 
 }

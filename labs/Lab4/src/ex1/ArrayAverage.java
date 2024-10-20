@@ -7,10 +7,14 @@ public class ArrayAverage {
         double average = 0;
 
         try {
+            if (arr.length == 0) {
+                System.out.println("Массив пустой, среднее арифметическое не может быть вычислено.");
+                return;
+            }
             for (int i = 0; i < arr.length; i++) {
                 sum += arr[i];
             }
-            average = sum / arr.length;
+            average = (double) sum / arr.length;
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Ошибка: выход за границы массива! " + e.getMessage());
 
@@ -23,6 +27,8 @@ public class ArrayAverage {
 
         if (average != 0) {
             System.out.println("Среднее арифметическое: " + average);
+        } else {
+            System.out.println("Среднее арифметическое не определено");
         }
 
     }

@@ -1,0 +1,7 @@
+Время: 2024-10-20T18:01:15.413086900
+Исключение: ex3.CustomUnsupportedOperationException: Операция sqrt не поддерживается.
+Сообщение: Операция sqrt не поддерживается.
+Стек вызовов:
+ex3.MathOperations.performOperation(MathOperations.java:39)
+ex3.MathOperations.main(MathOperations.java:15)
+--------------------------------
