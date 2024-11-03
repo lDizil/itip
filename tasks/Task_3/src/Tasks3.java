@@ -7,10 +7,10 @@ public class Tasks3 {
         System.out.println(task1("", ""));
         System.out.println("---------");
 
-        String[][] items = {
-                { "Laptop", "124200" },
-                { "Phone", "51450" },
-                { "Headphones", "13800" }
+        Object[][] items = {
+                { "Laptop", 124200 },
+                { "Phone", 51450 },
+                { "Headphones", 13800 }
         };
         System.out.println(Arrays.deepToString(task2(items, 25)));
         System.out.println("---------");
@@ -34,10 +34,10 @@ public class Tasks3 {
         System.out.println(task6(4));
         System.out.println("---------");
 
-        String[][] inventory = {
-                { "Скакалка", "550", "8" },
-                { "Шлем", "3750", "4" },
-                { "Мяч", "2900", "10" }
+        Object[][] inventory = {
+                { "Скакалка", 550, 8 },
+                { "Шлем", 3750, 4 },
+                { "Мяч", 2900, 10 }
         };
         System.out.println(task7(inventory));
         System.out.println("---------");
@@ -64,11 +64,11 @@ public class Tasks3 {
                 (a.charAt(0) == b.charAt(b.length() - 1) && a.charAt(a.length() - 1) == b.charAt(0));
     }
 
-    public static String[][] task2(String[][] a, int discount) {
+    public static Object[][] task2(Object[][] a, int discount) {
         for (int i = 0; i < a.length; i++) {
-            int price = Integer.parseInt(a[i][1]);
+            int price = (int) a[i][1];
             int newPrice = Math.max(1, (int) Math.round(price * (1 - discount / 100.0)));
-            a[i][1] = String.valueOf(newPrice);
+            a[i][1] = newPrice;
         }
         return a;
     }
@@ -110,18 +110,18 @@ public class Tasks3 {
         return count;
     }
 
-    public static String task7(String[][] items) {
+    public static String task7(Object[][] items) {
         String mostExpensiveItem = "";
         int maxCost = 0;
 
-        for (String[] item : items) {
-            int price = Integer.parseInt(item[1]);
-            int quantity = Integer.parseInt(item[2]);
+        for (Object[] item : items) {
+            int price = (int) item[1];
+            int quantity = (int) item[2];
             int cost = price * quantity;
 
             if (cost > maxCost) {
                 maxCost = cost;
-                mostExpensiveItem = item[0];
+                mostExpensiveItem = (String) item[0];
             }
         }
 
