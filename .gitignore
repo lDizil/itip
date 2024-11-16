@@ -18,4 +18,3 @@ bin/
 # настройки IDE
 .vscode/
 .idea/
-tasks/something
