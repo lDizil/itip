@@ -4,7 +4,7 @@ import java.util.EmptyStackException;
 
 public class Print {
     public static void main(String[] args) {
-        Stack<Integer> stack = new Stack<>(10);
+        Stack<Integer> stack = new Stack<>(7);
 
         try {
             stack.push(1);

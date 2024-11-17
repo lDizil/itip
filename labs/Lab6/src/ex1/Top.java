@@ -27,14 +27,11 @@ public class Top {
 
         scanner.close();
 
-        List<Map.Entry<String, Integer>> list = new ArrayList<>(wordCounts.entrySet());
-
-        list.sort((o1, o2) -> o2.getValue().compareTo(o1.getValue()));
-
         System.out.println("Топ-10 слов:");
-        for (int i = 0; i < Math.min(10, list.size()); i++) {
-            Map.Entry<String, Integer> entry = list.get(i);
-            System.out.println((i + 1) + ". " + entry.getKey() + ": " + entry.getValue());
-        }
+        wordCounts.entrySet().stream()
+                .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
+                .limit(10)
+                .forEach(entry -> System.out.println(entry.getKey() + ": " + entry.getValue()));
+
     }
 }

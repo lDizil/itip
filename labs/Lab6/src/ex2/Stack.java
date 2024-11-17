@@ -45,8 +45,7 @@ public class Stack<T> {
 
     public void printStack() {
         if (isEmpty()) {
-            System.out.println("Стек пуст.");
-            return;
+            throw new EmptyStackException();
         }
         System.out.print("Стек: ");
         for (int i = size - 1; i >= 0; i--) {

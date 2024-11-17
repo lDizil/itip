@@ -1,6 +1,7 @@
 package ex3;
 
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Shop {
@@ -23,25 +24,32 @@ public class Shop {
         return sold.values().stream().mapToInt(Integer::intValue).sum();
     }
 
-    public String getMostPopularProduct() {
+    public List<String> getMostPopularProducts() {
+        int maxSales = sold.values().stream().mapToInt(Integer::intValue).max().orElse(0);
+        if (maxSales == 0) {
+            return List.of("Нет продаж");
+        }
+
         return sold.entrySet().stream()
-                .max(Map.Entry.comparingByValue())
+                .filter(entry -> entry.getValue() == maxSales)
                 .map(Map.Entry::getKey)
-                .orElse("Нет продаж");
+                .toList();
     }
 
     public static void main(String[] args) {
         Shop tracker = new Shop();
 
         tracker.addSale("Яблоки", 10);
-        tracker.addSale("Апельсины", 5);
+        tracker.addSale("Апельсины", 6);
         tracker.addSale("Яблоки", 3);
         tracker.addSale("Бананы", 7);
+        tracker.addSale("Апельсины", 7);
 
         tracker.soldList();
 
         System.out.println("Общее количетсво продаж: " + tracker.totalSales() + " шт.");
 
-        System.out.println("Самый популярный товар: " + tracker.getMostPopularProduct());
+        System.out.println("Самые популярные товары: " + String.join(", ", tracker.getMostPopularProducts()));
+
     }
 }
