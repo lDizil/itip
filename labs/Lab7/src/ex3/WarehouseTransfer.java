@@ -1,57 +1,109 @@
 package ex3;
 
 import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.List;
+
+class Warehouse {
+    private final List<Integer> items;
+    private final Object lock = new Object();
+
+    public Warehouse(int[] items) {
+        this.items = new ArrayList<>();
+        for (int item : items) {
+            this.items.add(item);
+        }
+    }
+
+    public int getNextItem() {
+        synchronized (lock) {
+            if (!items.isEmpty()) {
+                return items.remove(0);
+            } else {
+                return -1;
+            }
+        }
+    }
+
+    public void returnItem(int item) {
+        synchronized (lock) {
+            items.add(0, item);
+        }
+    }
+
+    public boolean hasMoreItems() {
+        synchronized (lock) {
+            return !items.isEmpty();
+        }
+    }
+}
 
 class Worker extends Thread {
-    private final CountDownLatch latch;
-    private final int[] items;
-    private final int maxWeight = 150;
+    private final CyclicBarrier barrier;
+    private final Warehouse warehouse;
     private final int workerId;
-    private static int currentIndex = 0;
-    private static final Object lock = new Object();
+    private final int totalWorkers;
+    private static final List<Integer> currentBatch = new ArrayList<>();
+    private static final Object weightLock = new Object();
+    private static int totalWeight = 0;
+    private static final int MAX_WEIGHT = 150;
+    private static int currentTurn = 1;
 
-    public Worker(CountDownLatch latch, int[] items, int workerId) {
-        this.latch = latch;
-        this.items = items;
+    public Worker(CyclicBarrier barrier, Warehouse warehouse, int workerId, int totalWorkers) {
+        this.barrier = barrier;
+        this.warehouse = warehouse;
         this.workerId = workerId;
+        this.totalWorkers = totalWorkers;
     }
 
     @Override
     public void run() {
-        int weight = 0;
-        while (true) {
-            int item = 0;
-            synchronized (lock) {
-                if (currentIndex < items.length) {
-                    item = items[currentIndex];
-                    currentIndex++;
-                } else {
+        try {
+            while (true) {
+                int item = -1;
+
+                synchronized (weightLock) {
+                    while (currentTurn != workerId) {
+                        weightLock.wait();
+                    }
+
+                    if (warehouse.hasMoreItems()) {
+                        item = warehouse.getNextItem();
+                        if (item != -1 && totalWeight + item <= MAX_WEIGHT) {
+                            currentBatch.add(item);
+                            totalWeight += item;
+                            System.out.println("Грузчик " + workerId + " взял груз весом: " + item + " кг");
+                        } else if (item != -1) {
+                            warehouse.returnItem(item);
+                        }
+                    }
+
+                    currentTurn = (currentTurn % totalWorkers) + 1;
+                    weightLock.notifyAll();
+                }
+
+                barrier.await();
+
+                if (workerId == 1) {
+                    synchronized (weightLock) {
+                        if (!currentBatch.isEmpty()) {
+                            System.out.println("Грузчики переносят товары с общим весом: " + totalWeight + " кг");
+                            Thread.sleep(1000);
+                            System.out.println("Грузчики завершили перенос товаров.");
+                            currentBatch.clear();
+                            totalWeight = 0;
+                        }
+                    }
+                }
+
+                barrier.await();
+
+                if (item == -1 && !warehouse.hasMoreItems()) {
                     break;
                 }
             }
-
-            if (weight + item > maxWeight) {
-                synchronized (lock) {
-                    currentIndex--;
-                }
-                break;
-            }
-
-            weight += item;
-        }
-
-        try {
-            System.out.println("Грузчик " + workerId + " завершил с весом: " + weight + " кг");
-        } catch (Exception e) {
-            System.out.println("Ошибка при выводе данных для грузчика " + workerId + ": " + e.getMessage());
-        } finally {
-            latch.countDown();
-        }
-    }
-
-    public static int getCurrentIndex() {
-        synchronized (lock) {
-            return currentIndex;
+        } catch (InterruptedException | BrokenBarrierException e) {
+            Thread.currentThread().interrupt();
         }
     }
 }
@@ -63,30 +115,27 @@ public class WarehouseTransfer {
         for (int item : items) {
             totalWeight += item;
         }
-
         System.out.println("Общий вес товаров: " + totalWeight + " кг");
 
-        while (Worker.getCurrentIndex() < items.length) {
-            CountDownLatch latch = new CountDownLatch(3);
+        Warehouse warehouse = new Warehouse(items);
+        CyclicBarrier barrier = new CyclicBarrier(3);
 
-            Worker worker1 = new Worker(latch, items, 1);
-            Worker worker2 = new Worker(latch, items, 2);
-            Worker worker3 = new Worker(latch, items, 3);
+        Worker worker1 = new Worker(barrier, warehouse, 1, 3);
+        Worker worker2 = new Worker(barrier, warehouse, 2, 3);
+        Worker worker3 = new Worker(barrier, warehouse, 3, 3);
 
-            worker1.start();
-            worker2.start();
-            worker3.start();
+        worker1.start();
+        worker2.start();
+        worker3.start();
 
-            try {
-                latch.await();
-                System.out.println(
-                        "Цикл завершён. Осталось товаров: " + (items.length - Worker.getCurrentIndex()) + "\n");
-            } catch (InterruptedException e) {
-                System.out.println("Ошибка при ожидании завершения рабочих потоков: " + e.getMessage());
-                Thread.currentThread().interrupt();
-            }
+        try {
+            worker1.join();
+            worker2.join();
+            worker3.join();
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
         }
 
-        System.out.println("Все товары были перенесены.");
+        System.out.println("Все грузчики завершили работу.");
     }
 }
