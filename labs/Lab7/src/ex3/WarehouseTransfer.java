@@ -17,11 +17,15 @@ class Warehouse {
 
     public int getNextItem() {
         synchronized (lock) {
-            if (!items.isEmpty()) {
-                return items.remove(0);
-            } else {
-                return -1;
+            while (!items.isEmpty()) {
+                int item = items.remove(0);
+                if (item > Worker.MAX_WEIGHT) {
+                    System.out.println("Пропускаем груз весом: " + item + " кг (слишком тяжелый)");
+                    continue;
+                }
+                return item;
             }
+            return -1;
         }
     }
 
@@ -46,7 +50,7 @@ class Worker extends Thread {
     private static final List<Integer> currentBatch = new ArrayList<>();
     private static final Object weightLock = new Object();
     private static int totalWeight = 0;
-    private static final int MAX_WEIGHT = 150;
+    public static final int MAX_WEIGHT = 150;
     private static int currentTurn = 1;
 
     public Worker(CyclicBarrier barrier, Warehouse warehouse, int workerId, int totalWorkers) {
@@ -110,7 +114,7 @@ class Worker extends Thread {
 
 public class WarehouseTransfer {
     public static void main(String[] args) {
-        int[] items = { 50, 60, 40, 20, 30, 60, 50, 70, 80, 40, 90, 30, 60, 80 };
+        int[] items = { 50, 160, 40, 20, 30, 60, 50, 70, 80, 40, 90, 30, 60, 80 };
         int totalWeight = 0;
         for (int item : items) {
             totalWeight += item;
